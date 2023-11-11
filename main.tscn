@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://cqcqtpseyh4qp"]
+
+[ext_resource type="PackedScene" uid="uid://ouw4r4tyys4m" path="res://player.tscn" id="1_l6fdc"]
+[ext_resource type="Script" path="res://main.gd" id="1_vj0oy"]
+[ext_resource type="PackedScene" uid="uid://dtty5sfxoid8a" path="res://ball.tscn" id="2_w7km0"]
+[ext_resource type="PackedScene" uid="uid://bvpqr2rnghkjy" path="res://ai_player.tscn" id="3_jkq5a"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_vj0oy")
+
+[node name="Ball" parent="." instance=ExtResource("2_w7km0")]
+position = Vector2(574, 310)
+
+[node name="Player" parent="." instance=ExtResource("1_l6fdc")]
+position = Vector2(53, 289)
+
+[node name="Player2" parent="." instance=ExtResource("3_jkq5a")]
+
+[node name="Player1Score" type="Label" parent="."]
+offset_top = 324.0
+offset_right = 40.0
+offset_bottom = 350.0
+text = "0"
+
+[node name="Player2Score" type="Label" parent="."]
+offset_left = 1110.0
+offset_top = 324.0
+offset_right = 1150.0
+offset_bottom = 350.0
+text = "0"
+horizontal_alignment = 2
+
+[connection signal="left_score" from="Ball" to="." method="_on_ball_left_score"]
+[connection signal="right_score" from="Ball" to="." method="_on_ball_right_score"]

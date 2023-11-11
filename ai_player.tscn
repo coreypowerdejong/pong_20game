@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvpqr2rnghkjy"]
+
+[ext_resource type="Script" path="res://ai_player.gd" id="1_mrs71"]
+[ext_resource type="PackedScene" uid="uid://cwcklfrwms5nv" path="res://paddle.tscn" id="2_uj1ev"]
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_mrs71")
+
+[node name="Paddle" parent="." instance=ExtResource("2_uj1ev")]
+
+[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
