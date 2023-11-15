@@ -29,4 +29,4 @@ func _on_move_timer_timeout():
 		velocity = -1
 	else:
 		velocity = 1
-	print("Timeout")
+

@@ -6,23 +6,132 @@
 [ext_resource type="PackedScene" uid="uid://bvpqr2rnghkjy" path="res://ai_player.tscn" id="3_jkq5a"]
 
 [node name="Main" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_vj0oy")
 
 [node name="Ball" parent="." instance=ExtResource("2_w7km0")]
+process_mode = 1
 position = Vector2(574, 310)
 
 [node name="Player" parent="." instance=ExtResource("1_l6fdc")]
+process_mode = 1
 position = Vector2(53, 289)
 
 [node name="Player2" parent="." instance=ExtResource("3_jkq5a")]
+process_mode = 1
 
-[node name="Player1Score" type="Label" parent="."]
+[node name="UI" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Pause" type="Control" parent="UI"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseMenu" type="VBoxContainer" parent="UI/Pause"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Resume" type="Button" parent="UI/Pause/PauseMenu"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Continue"
+
+[node name="Restart" type="Button" parent="UI/Pause/PauseMenu"]
+layout_mode = 2
+text = "Restart"
+
+[node name="Quit" type="Button" parent="UI/Pause/PauseMenu"]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="PauseButton" type="Button" parent="UI"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -39.0
+offset_top = -70.0
+offset_right = 39.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "| |"
+
+[node name="HomeScreen" type="HBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = -23.5
+offset_right = 34.0
+offset_bottom = 23.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartGame" type="Button" parent="UI/HomeScreen"]
+layout_mode = 2
+text = "Start game"
+
+[node name="PlayerCount" type="CheckButton" parent="UI/HomeScreen"]
+layout_mode = 2
+text = "Singleplayer"
+
+[node name="PointSelector" type="VBoxContainer" parent="UI/HomeScreen"]
+layout_mode = 2
+
+[node name="Increase" type="Button" parent="UI/HomeScreen/PointSelector"]
+layout_mode = 2
+text = "+"
+
+[node name="PointCount" type="Label" parent="UI/HomeScreen/PointSelector"]
+layout_mode = 2
+text = "Score to win: 0"
+
+[node name="Decrease" type="Button" parent="UI/HomeScreen/PointSelector"]
+layout_mode = 2
+text = "-"
+
+[node name="Scoreboard" type="Control" parent="UI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Player1Score" type="Label" parent="UI/Scoreboard"]
+layout_mode = 0
 offset_top = 324.0
 offset_right = 40.0
 offset_bottom = 350.0
 text = "0"
 
-[node name="Player2Score" type="Label" parent="."]
+[node name="Player2Score" type="Label" parent="UI/Scoreboard"]
+layout_mode = 0
 offset_left = 1110.0
 offset_top = 324.0
 offset_right = 1150.0
@@ -32,3 +141,10 @@ horizontal_alignment = 2
 
 [connection signal="left_score" from="Ball" to="." method="_on_ball_left_score"]
 [connection signal="right_score" from="Ball" to="." method="_on_ball_right_score"]
+[connection signal="pressed" from="UI/Pause/PauseMenu/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="UI/Pause/PauseMenu/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="UI/Pause/PauseMenu/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="UI/PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="UI/HomeScreen/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="UI/HomeScreen/PointSelector/Increase" to="." method="_on_increase_pressed"]
+[connection signal="pressed" from="UI/HomeScreen/PointSelector/Decrease" to="." method="_on_decrease_pressed"]
