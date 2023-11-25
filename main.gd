@@ -4,11 +4,14 @@ var player1_score: int = 0
 var player2_score: int = 0
 var paused: bool = true
 var win_score: int = 5
+var multiplayer_flag: bool = false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$UI/Pause/PauseMenu.hide()
 	$Ball.hide()
+	$UI/GameOverScreen.hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -26,10 +29,13 @@ func _process(delta):
 		$UI/PauseButton.hide()
 	
 	
-	if player1_score == win_score:
-		print("Player 1 wins!")
-	if player2_score == win_score:
-		print("Player 2 wins!")
+	if player1_score == win_score or player2_score == win_score:
+		$Ball.hide()
+		var winner: int = 1 if player1_score > player2_score else 2
+		$UI/GameOverScreen/GameOverText.text = "Game Over!\nPlayer " + str(winner) + " wins!"
+		$UI/GameOverScreen.show()
+		paused = true
+		
 
 
 func _on_ball_left_score():
@@ -55,6 +61,7 @@ func _on_restart_pressed():
 	$Ball.reset()
 	paused = false
 	$UI/Pause/PauseMenu.hide()
+	$UI/GameOverScreen.hide()
 
 
 func _on_increase_pressed():
@@ -69,14 +76,22 @@ func _on_decrease_pressed():
 
 
 func _on_quit_pressed():
+	player1_score = 0
+	player2_score = 0
 	paused = true
 	$Ball.hide()
 	$UI/Pause/PauseMenu.hide()
+	$UI/GameOverScreen.hide()
 	$UI/HomeScreen.show()
-
+	
 
 func _on_start_game_pressed():
 	paused = false
 	$Ball.reset()
 	$Ball.show()
 	$UI/HomeScreen.hide()
+
+
+func _on_player_count_toggled(button_pressed):
+	multiplayer_flag = !multiplayer_flag
+	$UI/HomeScreen/PlayerCount.text = "Multiplayer" if multiplayer_flag else "Singleplayer"

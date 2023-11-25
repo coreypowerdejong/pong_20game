@@ -12,6 +12,7 @@ func reset():
 	position = screen_size * 0.5
 	direction = randf_range(0, 2 * PI)
 	velocity = Vector2(1,0).rotated(direction)
+	show()
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():

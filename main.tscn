@@ -139,6 +139,40 @@ offset_bottom = 350.0
 text = "0"
 horizontal_alignment = 2
 
+[node name="GameOverScreen" type="VBoxContainer" parent="UI"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -94.0
+offset_top = -43.5
+offset_right = 94.0
+offset_bottom = 43.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOverText" type="Label" parent="UI/GameOverScreen"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Game over!
+Player 1 wins!"
+horizontal_alignment = 1
+
+[node name="GameOverButtons" type="HBoxContainer" parent="UI/GameOverScreen"]
+layout_mode = 2
+
+[node name="Quit" type="Button" parent="UI/GameOverScreen/GameOverButtons"]
+process_mode = 3
+layout_mode = 2
+text = "Main Menu"
+
+[node name="Restart" type="Button" parent="UI/GameOverScreen/GameOverButtons"]
+layout_mode = 2
+text = "Play Again"
+
 [connection signal="left_score" from="Ball" to="." method="_on_ball_left_score"]
 [connection signal="right_score" from="Ball" to="." method="_on_ball_right_score"]
 [connection signal="pressed" from="UI/Pause/PauseMenu/Resume" to="." method="_on_resume_pressed"]
@@ -146,5 +180,8 @@ horizontal_alignment = 2
 [connection signal="pressed" from="UI/Pause/PauseMenu/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="UI/PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="UI/HomeScreen/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="toggled" from="UI/HomeScreen/PlayerCount" to="." method="_on_player_count_toggled"]
 [connection signal="pressed" from="UI/HomeScreen/PointSelector/Increase" to="." method="_on_increase_pressed"]
 [connection signal="pressed" from="UI/HomeScreen/PointSelector/Decrease" to="." method="_on_decrease_pressed"]
+[connection signal="pressed" from="UI/GameOverScreen/GameOverButtons/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="UI/GameOverScreen/GameOverButtons/Restart" to="." method="_on_restart_pressed"]
