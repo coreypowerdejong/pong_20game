@@ -9,10 +9,14 @@ var velocity = 0
 
 var ball_position: Vector2
 
+func setup():
+	position = Vector2(screen_size.x - x_offset.x, screen_size.y / 2)
+	
+	
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
-	position = Vector2(screen_size.x - x_offset.x, screen_size.y / 2)
+	setup()
 	$MoveTimer.start()
 
 

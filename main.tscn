@@ -13,11 +13,16 @@ script = ExtResource("1_vj0oy")
 process_mode = 1
 position = Vector2(574, 310)
 
-[node name="Player" parent="." instance=ExtResource("1_l6fdc")]
+[node name="Player1" parent="." instance=ExtResource("1_l6fdc")]
+process_mode = 1
+position = Vector2(53, 289)
+player1 = true
+
+[node name="Player2" parent="." instance=ExtResource("1_l6fdc")]
 process_mode = 1
 position = Vector2(53, 289)
 
-[node name="Player2" parent="." instance=ExtResource("3_jkq5a")]
+[node name="AIPlayer" parent="." instance=ExtResource("3_jkq5a")]
 process_mode = 1
 
 [node name="UI" type="Control" parent="."]
