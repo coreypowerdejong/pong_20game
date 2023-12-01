@@ -4,6 +4,7 @@
 size = Vector2(30, 120)
 
 [node name="Paddle" type="Area2D"]
+collision_layer = 2
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

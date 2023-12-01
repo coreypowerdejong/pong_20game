@@ -61,7 +61,6 @@ func _on_pause_button_pressed():
 	paused = true
 
 
-
 func _on_resume_pressed():
 	paused = false
 	$UI/Pause/PauseMenu.hide()
@@ -116,3 +115,13 @@ func _on_player_count_toggled(button_pressed):
 	$Player2.set_visible(multiplayer_flag)
 	$Player2/Paddle/CollisionShape2D.disabled = !multiplayer_flag
 	
+
+
+func _on_left_goal_area_entered(area):
+	player2_score += 1
+	$Ball.reset()
+
+
+func _on_right_goal_area_entered(area):
+	player1_score += 1
+	$Ball.reset()

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqcqtpseyh4qp"]
+[gd_scene load_steps=6 format=3 uid="uid://cqcqtpseyh4qp"]
 
 [ext_resource type="PackedScene" uid="uid://ouw4r4tyys4m" path="res://player.tscn" id="1_l6fdc"]
 [ext_resource type="Script" path="res://main.gd" id="1_vj0oy"]
 [ext_resource type="PackedScene" uid="uid://dtty5sfxoid8a" path="res://ball.tscn" id="2_w7km0"]
 [ext_resource type="PackedScene" uid="uid://bvpqr2rnghkjy" path="res://ai_player.tscn" id="3_jkq5a"]
+[ext_resource type="PackedScene" uid="uid://bnaofttxwxkx1" path="res://goal.tscn" id="5_hgsdx"]
 
 [node name="Main" type="Node2D"]
 process_mode = 3
@@ -12,6 +13,7 @@ script = ExtResource("1_vj0oy")
 [node name="Ball" parent="." instance=ExtResource("2_w7km0")]
 process_mode = 1
 position = Vector2(574, 310)
+collision_mask = 3
 
 [node name="Player1" parent="." instance=ExtResource("1_l6fdc")]
 process_mode = 1
@@ -178,6 +180,11 @@ text = "Main Menu"
 layout_mode = 2
 text = "Play Again"
 
+[node name="LeftGoal" parent="." instance=ExtResource("5_hgsdx")]
+
+[node name="RightGoal" parent="." instance=ExtResource("5_hgsdx")]
+position = Vector2(1052, 0)
+
 [connection signal="left_score" from="Ball" to="." method="_on_ball_left_score"]
 [connection signal="right_score" from="Ball" to="." method="_on_ball_right_score"]
 [connection signal="pressed" from="UI/Pause/PauseMenu/Resume" to="." method="_on_resume_pressed"]
@@ -190,3 +197,5 @@ text = "Play Again"
 [connection signal="pressed" from="UI/HomeScreen/PointSelector/Decrease" to="." method="_on_decrease_pressed"]
 [connection signal="pressed" from="UI/GameOverScreen/GameOverButtons/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="UI/GameOverScreen/GameOverButtons/Restart" to="." method="_on_restart_pressed"]
+[connection signal="area_entered" from="LeftGoal" to="." method="_on_left_goal_area_entered"]
+[connection signal="area_entered" from="RightGoal" to="." method="_on_right_goal_area_entered"]
